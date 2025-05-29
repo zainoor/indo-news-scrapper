@@ -56,4 +56,4 @@ all_kompas_data = [scrap_kompas_article(url) for url in kompas_urls]
 
 # 💾 Save to CSV
 df = pd.DataFrame(all_kompas_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-df.to_csv("rawdata/kompas_scraped.csv", index=False, encoding="utf-8")
+df.to_csv("result/kompas_scraped.csv", index=False, encoding="utf-8")

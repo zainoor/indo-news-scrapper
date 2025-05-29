@@ -80,4 +80,4 @@ all_data = [scrap_article(url) for url in all_urls]
 
 # Save to CSV
 df = pd.DataFrame(all_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-df.to_csv("rawdata/turnbackhoax_scraped.csv", index=False, encoding="utf-8")
+df.to_csv("result/turnbackhoax_scraped.csv", index=False, encoding="utf-8")
