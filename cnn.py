@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
     all_article_urls = set()
     for section in section_urls:
-        urls = get_cnn_article_urls(section, limit=15)
+        urls = get_cnn_article_urls(section, limit=30)
         all_article_urls.update(urls)  # Use set to avoid duplicates
 
     print(f"🔗 Total unique URLs: {len(all_article_urls)}")
