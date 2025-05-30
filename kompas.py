@@ -48,7 +48,18 @@ kompas_urls = [
     "https://nasional.kompas.com/read/2025/05/29/22033651/kedatangan-perdana-44-jemaah-haji-khusus-tiba-di-bandara-taif",
     "https://nasional.kompas.com/read/2025/05/29/21235881/momen-presiden-macron-makan-siang-bareng-taruna-di-akmil-dimulai-prabowo",
     "https://nasional.kompas.com/read/2025/05/29/21043761/candi-borobudur-jadi-saksi-kerja-sama-indonesia-dan-perancis-apa-saja",
-    "https://nasional.kompas.com/read/2025/05/29/20364451/cuaca-panas-ekstrem-saat-puncak-haji-menag-ingatkan-jemaah-perbanyak-minum"
+    "https://nasional.kompas.com/read/2025/05/29/20364451/cuaca-panas-ekstrem-saat-puncak-haji-menag-ingatkan-jemaah-perbanyak-minum",
+    "https://bandung.kompas.com/read/2025/05/29/161905478/puluhan-suporter-persikas-subang-yang-bikin-dedi-mulyadi-emosi-masih",
+    "https://nasional.kompas.com/read/2025/05/29/18290411/ketua-ppp-jaktim-kritik-rommy-jelang-muktamar-harusnya-taubat-nasuha",
+    "https://nasional.kompas.com/read/2025/05/30/06470601/dandim-jakpus-surati-bea-cukai-untuk-amankan-barang-kritik-mencuat",
+    "https://bandung.kompas.com/read/2025/05/30/054210978/ngamuk-ke-suporter-persikas-dedi-mulyadi-kemarahan-saya-akan-diframing",
+    "https://bandung.kompas.com/read/2025/05/29/131903178/anggaran-perbaikan-jalan-cirebon-dikorupsi-rp-26-miliar-kadis-dan-rombongan",
+    "https://nasional.kompas.com/read/2025/05/29/19543751/kpk-terima-informasi-gratifikasi-di-kementerian-pu-pegawai-dimintai-uang",
+    "https://nasional.kompas.com/read/2025/05/29/16163541/menag-janji-bantu-penerbitan-visa-haji-furoda-tahun-ini",
+    "https://nasional.kompas.com/read/2025/05/29/14552121/anggota-dpr-perpanjangan-usia-pensiun-asn-pasti-ada-dampak-negatif",
+    "https://denpasar.kompas.com/read/2025/05/30/053658578/gubernur-koster-saya-minta-produksi-air-minum-kemasan-di-bawah-1-liter",
+    "https://regional.kompas.com/read/2025/05/29/191712078/mk-putuskan-biaya-sd-smp-gratis-pengamat-jangan-sampai-pendidikan-yang",
+    "https://www.kompas.com/global/read/2025/05/29/155950370/baku-tembak-thailand-kamboja-panglima-militer-kedua-kubu-bertemu"
 ]
 
 # 🔁 Scrape all
