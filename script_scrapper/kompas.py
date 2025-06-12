@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+from datetime import datetime
 
 # Get Kompas article URLs from paginated section pages
 def get_kompas_article_urls(base_url, pages=3, limit_per_page=10):
@@ -87,5 +88,9 @@ if __name__ == "__main__":
     all_data = [scrap_kompas_article(url) for url in all_urls]
 
     df = pd.DataFrame(all_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-    df.to_csv("result/kompas_scraped.csv", index=False, encoding="utf-8")
-    print(f"✅ Saved {len(df)} articles to result/kompas_scraped.csv")
+    
+    timestamp = datetime.now().strftime("%d%m%Y")
+    filename = f"result/kompas_scraped_{timestamp}.csv"
+    df.to_csv(filename, index=False, encoding="utf-8")
+
+    print(f"✅ Saved {len(df)} articles to {filename}")

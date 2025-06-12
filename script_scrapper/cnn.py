@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+from datetime import datetime
 
 def get_cnn_article_urls(section_url, limit=10):
     headers = {
@@ -88,6 +89,9 @@ if __name__ == "__main__":
 
     # Save to CSV
     df = pd.DataFrame(all_cnn_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-    df.to_csv("result/cnnindonesia_scraped.csv", index=False, encoding="utf-8")
+    
+    timestamp = datetime.now().strftime("%d%m%Y")
+    filename = f"result/cnnindonesia_scraped_{timestamp}.csv"
+    df.to_csv(filename, index=False, encoding="utf-8")
 
-    print(f"✅ Saved {len(df)} articles to result/cnnindonesia_scraped.csv")
+    print(f"✅ Saved {len(df)} articles to {filename}")

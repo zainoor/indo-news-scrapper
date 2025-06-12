@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 import re
+from datetime import datetime
 
 def get_tempo_article_urls(base_url="https://www.tempo.co/indeks", pages=2):
     headers = {"User-Agent": "Mozilla/5.0"}
@@ -87,5 +88,8 @@ if __name__ == "__main__":
 
     articles = [scrap_tempo_article(url) for url in article_urls]
     df = pd.DataFrame(articles, columns=["Title", "FullText", "Author", "Url", "Date"])
-    df.to_csv("result/tempo_scraped.csv", index=False, encoding="utf-8")
-    print(f"✅ Saved {len(df)} articles to result/tempo_scraped.csv")
+    timestamp = datetime.now().strftime("%d%m%Y")
+    filename = f"result/tempo_scraped_{timestamp}.csv"
+    df.to_csv(filename, index=False, encoding="utf-8")
+
+    print(f"✅ Saved {len(df)} articles to {filename}")

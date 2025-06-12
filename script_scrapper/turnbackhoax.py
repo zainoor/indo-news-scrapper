@@ -64,7 +64,8 @@ def scrap_article(url):
         }
 
 # Auto-scrape across months and pages
-months = ["2025/05", "2025/04", "2025/03"]
+months = ["2025/06", "2025/05", "2025/04", "2025/03", "2025/02", 
+          "2025/01", "2024/12", "2024/11", "2024/10", "2024/09"]
 all_urls = []
 
 for month in months:
@@ -80,4 +81,4 @@ all_data = [scrap_article(url) for url in all_urls]
 
 # Save to CSV
 df = pd.DataFrame(all_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-df.to_csv("result/turnbackhoax_scraped.csv", index=False, encoding="utf-8")
+df.to_csv("result/turnbackhoax_scraped_new.csv", index=False, encoding="utf-8")

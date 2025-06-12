@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+from datetime import datetime
 
 # Step 1: Automatically get article URLs from a section page
 def get_detik_article_urls(section_url, limit=10):
@@ -74,18 +75,15 @@ if __name__ == "__main__":
     all_article_urls = set()
     for section in section_urls:
         urls = get_detik_article_urls(section, limit=30)
-        all_article_urls.update(urls)  # Use set to avoid duplicates
+        all_article_urls.update(urls)
 
     print(f"🔗 Total unique URLs: {len(all_article_urls)}")
 
-
     all_detik_data = [scrap_detik_article(url) for url in all_article_urls]
-
     df = pd.DataFrame(all_detik_data, columns=["Title", "FullText", "Author", "Url", "Date"])
-    df.to_csv("result/detik_scraped.csv", index=False, encoding="utf-8")
-    print(f"✅ Saved {len(df)} articles to result/detik_scraped.csv")
 
-    # section_url = "https://news.detik.com/berita"
-    # article_urls = get_detik_article_urls(section_url, limit=20)
+    timestamp = datetime.now().strftime("%d%m%Y")
+    filename = f"result/detik_scraped_{timestamp}.csv"
+    df.to_csv(filename, index=False, encoding="utf-8")
 
-    # print(f"🔗 Found {len(article_urls)} Detik article URLs")
+    print(f"✅ Saved {len(df)} articles to {filename}")
