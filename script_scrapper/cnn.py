@@ -74,7 +74,11 @@ if __name__ == "__main__":
     # 🔗 Add more CNN sections here
     section_urls = [
         "https://www.cnnindonesia.com/nasional",
-        "https://www.cnnindonesia.com/internasional"
+        "https://www.cnnindonesia.com/internasional",
+        "https://www.cnnindonesia.com/ekonomi",
+        "https://www.cnnindonesia.com/olahraga",
+        "https://www.cnnindonesia.com/teknologi",
+        "https://www.cnnindonesia.com/hiburan"
     ]
 
     all_article_urls = set()

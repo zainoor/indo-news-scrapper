@@ -75,7 +75,11 @@ if __name__ == "__main__":
     section_bases = [
         "https://nasional.kompas.com",
         "https://regional.kompas.com",
-        "https://www.kompas.com/global"
+        "https://www.kompas.com/global",
+        "https://money.kompas.com",             
+        "https://tekno.kompas.com",             
+        "https://bola.kompas.com",              
+        "https://entertainment.kompas.com"      
     ]
 
     all_urls = set()

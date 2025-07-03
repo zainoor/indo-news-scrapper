@@ -69,7 +69,11 @@ def scrap_detik_article(url):
 if __name__ == "__main__":
     section_urls = [
         "https://news.detik.com/berita",
-        "https://news.detik.com/internasional"
+        "https://news.detik.com/internasional",
+        "https://finance.detik.com/",
+        "https://inet.detik.com",              
+        "https://sport.detik.com",          
+        "https://hot.detik.com"              
     ]
 
     all_article_urls = set()

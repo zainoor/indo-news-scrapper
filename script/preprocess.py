@@ -2,16 +2,7 @@ import pandas as pd
 import os
 import re
 
-# Your source files
-files = {
-    "kompas": "result/kompas_scraped.csv",
-    "cnn": "result/cnnindonesia_scraped.csv",
-    "detik": "result/detik_scraped.csv",
-    "tempo": "result/tempo_scraped.csv",
-    "turnbackhoax": "result/turnbackhoax_scraped.csv"
-}
-
-# Cleaning function
+# 💡 Define cleaning function
 def clean_text(text):
     if pd.isna(text):
         return ""
@@ -23,39 +14,64 @@ def clean_text(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-# Process each file
+# 📁 Directories to process
+directories = ["result", "result_archive", "result_old"]
+
+# 🔍 Find all CSV files
+csv_files = []
+for dir_path in directories:
+    for root, _, files in os.walk(dir_path):
+        for file in files:
+            if file.endswith(".csv"):
+                csv_files.append(os.path.join(root, file))
+
+print(f"🔍 Found {len(csv_files)} CSV files.")
+
 dataframes = []
-for source, path in files.items():
-    print(f"Processing: {path}")
-    df = pd.read_csv(path)
+for path in csv_files:
+    try:
+        df = pd.read_csv(path)
 
-    # Combine Title + FullText
-    df["cleaned"] = (df["Title"].fillna("") + " " + df["FullText"].fillna("")).apply(clean_text)
+        # Ensure required columns exist
+        if not {"Title", "FullText"}.issubset(df.columns):
+            print(f"⚠️ Skipped (missing columns): {path}")
+            continue
 
-    # Drop rows where 'cleaned' is empty after cleaning
-    df = df[df["cleaned"].str.strip() != ""]
+        # Combine and clean
+        df["cleaned"] = (df["Title"].fillna("") + " " + df["FullText"].fillna("")).apply(clean_text)
 
-    # Label
-    df["label"] = 1 if source == "turnbackhoax" else 0
+        # Drop empty cleaned rows
+        df = df[df["cleaned"].str.strip() != ""]
 
-    # Select columns
-    df = df[["cleaned", "label"]]
-    dataframes.append(df)
+        # Determine label based on filename
+        label = 1 if "turnbackhoax" in path.lower() else 0
+        df["label"] = label
 
-# Combine all
-merged_df = pd.concat(dataframes).reset_index(drop=True)
+        # Keep only necessary columns
+        df = df[["cleaned", "label"]]
+        dataframes.append(df)
 
-# Drop duplicates based on the 'cleaned' column
-before = len(merged_df)
-merged_df.drop_duplicates(subset=["cleaned"], inplace=True)
-after = len(merged_df)
-print(f"Removed {before - after} duplicate entries.")
+        print(f"✅ Processed {path} ({len(df)} rows)")
 
-# Shuffle
-merged_df = merged_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    except Exception as e:
+        print(f"❌ Failed to process {path}: {e}")
 
-# Save
-os.makedirs("cleandata", exist_ok=True)
-merged_df.to_csv("cleandata/hoax_dataset_2025.csv", index=False)
+# Combine and deduplicate
+if dataframes:
+    merged_df = pd.concat(dataframes, ignore_index=True)
+    before = len(merged_df)
+    merged_df.drop_duplicates(subset=["cleaned"], inplace=True)
+    after = len(merged_df)
 
-print(f"✅ Done! Final cleaned dataset saved to cleandata/hoax_dataset_2025.csv ({after} entries).")
+    print(f"🧹 Removed {before - after} duplicate entries.")
+
+    # Shuffle
+    merged_df = merged_df.sample(frac=1, random_state=42).reset_index(drop=True)
+
+    # Save
+    os.makedirs("cleandata", exist_ok=True)
+    merged_df.to_csv("cleandata/hoax_dataset_2025.csv", index=False)
+
+    print(f"🎉 Done! Final cleaned dataset saved to cleandata/hoax_dataset_2025.csv ({after} entries)")
+else:
+    print("⚠️ No valid data found to merge.")
